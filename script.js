@@ -13,10 +13,11 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
-    const totalFrames = 30;
+    const totalFrames = 120;
+    const startFrame = 39;
     const frameSources = Array.from({ length: totalFrames }, (_, index) => {
-        const frameNumber = String(index + 1).padStart(3, '0');
-        return `ezgif-38211703915cee03-jpg/frame_${frameNumber}.jpg`;
+        const frameNumber = String(index + startFrame).padStart(3, '0');
+        return `ezgif-38211703915cee03-jpg/ezgif-frame-${frameNumber}.jpg`;
     });
     const frames = frameSources.map((src) => {
         const image = new Image();
@@ -86,10 +87,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function getScrollProgress() {
         const maxScroll = Math.max(
-            document.documentElement.scrollHeight - window.innerHeight,
+            heroSection.offsetHeight - window.innerHeight,
             1
         );
-        const scrollY = clamp(window.scrollY || window.pageYOffset || 0, 0, maxScroll);
+        const scrollOffset = (window.scrollY || window.pageYOffset || 0) - heroSection.offsetTop;
+        const scrollY = clamp(scrollOffset, 0, maxScroll);
         return scrollY / maxScroll;
     }
 
