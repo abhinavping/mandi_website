@@ -217,20 +217,53 @@ header {
 /* Signature Dishes */
 .dishes-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2.5rem;
+  padding: 1rem;
 }
 
 .dish-card {
   position: relative;
-  border-radius: 12px;
+  border-radius: 16px;
   overflow: hidden;
   aspect-ratio: 3/4;
   cursor: pointer;
   background-color: var(--primary-light);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
-  transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+  transition: all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.dish-badge {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background-color: var(--accent);
+  color: var(--primary);
+  padding: 0.4rem 1rem;
+  border-radius: 30px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  z-index: 10;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(5px);
+}
+
+.dish-price {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(18, 18, 18, 0.7);
+  backdrop-filter: blur(10px);
+  color: var(--text-light);
+  padding: 0.5rem 1.2rem;
+  border-radius: 30px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 10;
 }
 
 .dish-card::after {
@@ -248,9 +281,9 @@ header {
 }
 
 .dish-card:hover {
-  transform: translateY(-10px);
-  border-color: rgba(212, 175, 55, 0.4);
-  box-shadow: 0 20px 40px rgba(212, 175, 55, 0.15);
+  transform: translateY(-15px);
+  border-color: rgba(212, 175, 55, 0.5);
+  box-shadow: 0 25px 50px rgba(212, 175, 55, 0.2);
 }
 
 .dish-card:hover::after {
@@ -262,12 +295,12 @@ header {
   height: 100%;
   object-fit: cover;
   transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.5s ease;
-  filter: brightness(0.85);
+  filter: brightness(0.8);
 }
 
 .dish-card:hover .dish-image {
-  transform: scale(1.1);
-  filter: brightness(0.35);
+  transform: scale(1.08);
+  filter: brightness(0.4);
 }
 
 .dish-overlay {
@@ -276,39 +309,100 @@ header {
   left: 0;
   width: 100%;
   height: 100%;
-  padding: 2.5rem 2rem;
-  background: linear-gradient(to top, rgba(18, 18, 18, 0.95) 0%, rgba(18, 18, 18, 0.4) 50%, rgba(18, 18, 18, 0) 100%);
+  padding: 2.5rem;
+  background: linear-gradient(to top, rgba(10, 10, 10, 0.98) 0%, rgba(10, 10, 10, 0.8) 35%, rgba(10, 10, 10, 0) 100%);
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   pointer-events: none;
+  transition: all 0.5s ease;
+}
+
+.dish-info {
+  width: 100%;
+  position: relative;
+  z-index: 10;
 }
 
 .dish-overlay h3 {
-  font-size: 1.8rem;
+  font-size: 2rem;
   color: var(--accent);
   margin-bottom: 0.5rem;
-  transform: translateY(20px);
+  transform: translateY(30px);
   transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+  line-height: 1.1;
+}
+
+.dish-stars {
+  color: #FFA534;
+  font-size: 0.9rem;
+  margin-bottom: 0.8rem;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) 0.05s;
+}
+
+.dish-stars span {
+  color: var(--secondary);
+  font-size: 0.8rem;
+  margin-left: 0.5rem;
+  font-family: var(--font-body);
 }
 
 .dish-overlay p {
-  font-size: 1rem;
-  color: var(--secondary);
+  font-size: 1.05rem;
+  color: #dddddd;
   opacity: 0;
-  transform: translateY(20px);
+  transform: translateY(30px);
   transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) 0.1s;
   font-weight: 300;
   letter-spacing: 0.5px;
-  margin-bottom: 0;
+  margin-bottom: 1.5rem;
+  border-left: 3px solid var(--accent);
+  padding-left: 1rem;
 }
 
-.dish-card:hover .dish-overlay h3 {
-  transform: translateY(0);
+.dish-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--primary);
+  background-color: var(--accent);
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) 0.15s;
+  pointer-events: auto;
 }
 
-.dish-card:hover .dish-overlay p {
+.dish-action i {
+  transition: transform 0.3s ease;
+}
+
+.dish-action:hover i {
+  transform: translateX(5px);
+  color: var(--primary);
+}
+
+.dish-action:hover {
+  background-color: var(--text-light);
+}
+
+.dish-card:hover .dish-overlay background {
+  background: linear-gradient(to top, rgba(10, 10, 10, 1) 0%, rgba(10, 10, 10, 0.9) 45%, rgba(10, 10, 10, 0) 100%);
+}
+
+.dish-card:hover .dish-overlay h3,
+.dish-card:hover .dish-stars,
+.dish-card:hover .dish-overlay p,
+.dish-card:hover .dish-action {
   opacity: 1;
   transform: translateY(0);
 }
